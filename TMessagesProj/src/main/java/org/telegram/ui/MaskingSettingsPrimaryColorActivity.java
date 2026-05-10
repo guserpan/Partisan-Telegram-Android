@@ -26,6 +26,7 @@ import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.R;
 import org.telegram.messenger.SharedConfig;
+import org.telegram.messenger.partisan.masked_ptg.MaskedPtgConfig;
 import org.telegram.ui.ActionBar.ActionBar;
 import org.telegram.ui.ActionBar.ActionBarMenu;
 import org.telegram.ui.ActionBar.BaseFragment;
@@ -79,6 +80,8 @@ public class MaskingSettingsPrimaryColorActivity extends BaseFragment {
                     finishFragment();
                 } else if (id == done_button) {
                     SharedConfig.maskingPrimaryColor = mColor;
+                    MaskedPtgConfig.overridenColor = mColor;
+                    MaskedPtgConfig.colorOverride = true;
                     finishFragment();
                 }
             }

@@ -241,6 +241,8 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
     private int maskingPrimaryColorRow;
     private int maskingIconRow;
     private int maskingLoadIconRow;
+    private int allowCallNotificationRow;
+    private int allowNotHiddenNotificationsRow;
     private int fakePasscodeDetailRow;
 
     private int captureHeaderRow;
@@ -528,7 +530,16 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
                         SharedConfig.clearCacheOnLock = !SharedConfig.clearCacheOnLock;
                         SharedConfig.saveConfig();
                         ((TextCheckCell) view).setChecked(SharedConfig.clearCacheOnLock);
-                    } else if (position == badPasscodeAttemptsRow) {
+                    } else if (position == allowCallNotificationRow) {
+                        MaskedPtgConfig.overridenAllowCallNotification = true;
+                        MaskedPtgConfig.allowCallNotificationOverride = !MaskedPtgConfig.allowCallNotificationOverride;
+                        ((TextCheckCell) view).setChecked(MaskedPtgConfig.allowCallNotificationOverride);
+                    } else if (position == allowNotHiddenNotificationsRow) {
+                        MaskedPtgConfig.overridenAllowNotHiddenNotifications = true;
+                        MaskedPtgConfig.allowNotHiddenNotificationsOverride = !MaskedPtgConfig.allowNotHiddenNotificationsOverride;
+                        ((TextCheckCell) view).setChecked(MaskedPtgConfig.allowNotHiddenNotificationsOverride);
+                    }
+                    else if (position == badPasscodeAttemptsRow) {
                         presentFragment(new BadPasscodeAttemptsActivity());
                     } else if (position == badPasscodePhotoFrontRow) {
                         showPhotoWarning(() -> {
@@ -1257,6 +1268,8 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
         restoreFakePasscodeRow = -1;
         maskingSettingsRow = -1;
         fakePasscodeDetailRow = -1;
+        allowCallNotificationRow = -1;
+        allowNotHiddenNotificationsRow = -1;
         bruteForceProtectionRow = -1;
         clearCacheOnLockRow = -1;
         clearCacheOnLockDetailRow = -1;
@@ -1305,6 +1318,8 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
             maskingPrimaryColorRow = rowCount++;
             maskingIconRow = rowCount++;
             maskingLoadIconRow = rowCount++;
+            allowCallNotificationRow = rowCount++;
+            allowNotHiddenNotificationsRow = rowCount++;
             fakePasscodeDetailRow = rowCount++;
         }
 
@@ -1685,6 +1700,7 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
                     || position == badPasscodeAttemptsRow || position == badPasscodePhotoFrontRow
                     || position == badPasscodePhotoBackRow || position == badPasscodeMuteAudioRow
                     || position == bruteForceProtectionRow || position == clearCacheOnLockRow
+                    || position == allowCallNotificationRow || position == allowNotHiddenNotificationsRow
                     || position == captureRow || SharedConfig.passcodeEnabled() && position == changePasscodeRow
                     || (firstFakePasscodeRow != -1 && firstFakePasscodeRow <= position && position <= lastFakePasscodeRow)
                     || position == addFakePasscodeRow || position == restoreFakePasscodeRow
@@ -1750,6 +1766,10 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
                         textCell.setTextAndCheck(LocaleController.getString("TakePhotoWithBackCamera", R.string.TakePhotoWithBackCamera), SharedConfig.takePhotoWithBadPasscodeBack, SharedConfig.takePhotoWithBadPasscodeFront || SharedConfig.takePhotoWithBadPasscodeBack);
                     } else if (position == badPasscodeMuteAudioRow) {
                         textCell.setTextAndCheck(LocaleController.getString("MuteAudioWhenTakingPhoto", R.string.MuteAudioWhenTakingPhoto), SharedConfig.takePhotoMuteAudio, false);
+                    } else if (position == allowCallNotificationRow) {
+                        textCell.setTextAndCheck(LocaleController.getString(R.string.AllowCallNotification), MaskedPtgConfig.allowCallNotification(), false);
+                    } else if (position == allowNotHiddenNotificationsRow) {
+                        textCell.setTextAndCheck(LocaleController.getString(R.string.AllowNotHiddenNotifications), MaskedPtgConfig.allowNotHiddenNotifications(), false);
                     }
                     break;
                 }
@@ -1820,6 +1840,14 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
                         textCell.setText(LocaleController.getString(R.string.MaskingLoadIcon), false);
                         textCell.setTag(Theme.key_windowBackgroundWhiteBlueText4);
                         textCell.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlueText4));
+                    } else if (position == allowCallNotificationRow) {
+                        textCell.setText(LocaleController.getString(R.string.AllowCallNotification), false);
+                        textCell.setTag(Theme.key_windowBackgroundWhiteBlueText4);
+                        textCell.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlueText4));
+                    } else if (position == allowNotHiddenNotificationsRow) {
+                        textCell.setText(LocaleController.getString(R.string.AllowNotHiddenNotifications), false);
+                        textCell.setTag(Theme.key_windowBackgroundWhiteBlueText4);
+                        textCell.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlueText4));
                     }
                     break;
                 }
@@ -1840,6 +1868,10 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
                         cell.setText(LocaleController.getString(R.string.MaskingIcon));
                     } else if (position == maskingLoadIconRow) {
                         cell.setText(LocaleController.getString(R.string.MaskingLoadIcon));
+                    } else if (position == allowNotHiddenNotificationsRow) {
+                        cell.setText(LocaleController.getString(R.string.AllowNotHiddenNotifications));
+                    } else if (position == allowCallNotificationRow) {
+                        cell.setText(LocaleController.getString(R.string.AllowCallNotification));
                     }
                     break;
                 }
@@ -1904,13 +1936,15 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
             if (position == fingerprintRow || position == captureRow
                     || position == bruteForceProtectionRow || position == clearCacheOnLockRow
                     || position == badPasscodePhotoFrontRow || position == badPasscodePhotoBackRow
-                    || position == badPasscodeMuteAudioRow) {
+                    || position == badPasscodeMuteAudioRow
+                    || position == allowNotHiddenNotificationsRow || position == allowCallNotificationRow) {
                 return VIEW_TYPE_CHECK;
             } else if (position == changePasscodeRow || position == autoLockRow || position == disablePasscodeRow
                     || position == addFakePasscodeRow || position == restoreFakePasscodeRow
                     || position == badPasscodeAttemptsRow
                     || (firstFakePasscodeRow != -1 && firstFakePasscodeRow <= position && position <= lastFakePasscodeRow)
-                    || position == partisanSettingsRow || position == maskingNotificationTextRow || position == maskingPrimaryColorRow || position == maskingIconRow || position == maskingLoadIconRow) {
+                    || position == partisanSettingsRow || position == maskingNotificationTextRow || position == maskingPrimaryColorRow || position == maskingIconRow || position == maskingLoadIconRow
+                    ) {
                 return VIEW_TYPE_SETTING;
             } else if (position == autoLockDetailRow || position == captureDetailRow || position == hintRow
                     || position == bruteForceProtectionDetailRow || position == clearCacheOnLockDetailRow

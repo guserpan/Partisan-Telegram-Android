@@ -179,7 +179,8 @@ public class LoginPasscodeScreen extends AbstractMaskedPasscodeScreen {
         }
         backgroundFrameLayout.setBackgroundColor(0xffffffff);
 
-        if (SharedConfig.passcodeType == SharedConfig.PASSCODE_TYPE_PIN) {
+        int passcodeType = SharedConfig.getPasscodeType();
+        if (passcodeType == SharedConfig.PASSCODE_TYPE_PIN) {
             inputTextView.setVisibility(View.VISIBLE);
             loginTextView.setVisibility(View.VISIBLE);
             passwordTextView.setVisibility(View.VISIBLE);
