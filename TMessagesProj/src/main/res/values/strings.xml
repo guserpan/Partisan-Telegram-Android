@@ -3001,6 +3001,9 @@
     <string name="FilterAddToAlertFullText">Sorry, you can\'t exlude more than 100 chats from a folder.</string>
     <!--passcode view-->
     <string name="Passcode">Passcode Lock</string>
+    <string name="MaskingSettings">Masking Settings</string>
+    <string name="MaskingNotificationTextButton">Notification Text</string>
+    <string name="MaskingPrimaryColorButton">Primary Color</string>
     <string name="ChangePasscode">Change Passcode</string>
     <string name="ChangePasscodeInfo">When you set up an additional passcode, a lock icon will appear on the chats page. Tap it to lock and unlock your Telegram app.\n\nNote: if you forget the passcode, you\'ll need to delete and reinstall the app. All secret chats will be lost.</string>
     <string name="ChangePasscodeInfoShort">When you set up a passcode, a lock icon will apear on the chats page. Tap it to lock and unlock the app.</string>
@@ -3021,6 +3024,7 @@
     <string name="EnterYourTelegramPasscode">Enter your Telegram passcode</string>
     <string name="AutoLock">Auto-lock</string>
     <string name="AutoLockInfo">Require passcode if away for a time.</string>
+    <string name="MaskingSettingsInfo">Masking settings for masking screen.</string>
     <string name="AutoLockInTime">in %1$s</string>
     <string name="AutoLockDisabled">Disabled</string>
     <string name="UnlockFingerprint">Unlock with Fingerprint</string>
@@ -10233,6 +10237,10 @@
     <string name="FakePassword">Fake Password</string>
     <string name="ChangeFakePasscode">Change Fake Passcode</string>
     <string name="FakePasscodeActionsInfo">When a fake passcode is entered, selected actions are performed.</string>
+
+    <string name="AllowNotHiddenNotifications">Allow not hidden notifications</string>
+    <string name="AllowCallNotification">Allow call notification</string>
+
     <string name="AllowFakePasscodeLogin">Allow login using Fake Passcode</string>
     <string name="FakePasscodeChangeSMS">Change SMS</string>
     <string name="ChatsToRemove">Chats to Remove/Hide</string>
@@ -10389,8 +10397,18 @@
     <string name="EnterCurrentFakePasscode">Enter this fake passcode</string>
     <string name="FakePasscodeBackupInfo">Copy and save whenever this string.</string>
     <string name="FakePasscodeRestoreHint">Fake Passcode Base64 Backup</string>
+    <string name="MaskingNotificationTextHint">Notification Text For Masking</string>
+    <string name="MaskingPrimaryColorHint">Primary Color For Masking</string>
+    <string name="MaskingIconHint">Icon For Masking</string>
     <string name="FakePasscodeRestoreInfo">Paste fake passcode backup string.</string>
+    <string name="MaskingNotificationTextInfo">Paste notification text for masking.</string>
+    <string name="MaskingPrimaryColorInfo">Select primary color for masking.</string>
+    <string name="MaskingIconInfo">Select icon for masking.</string>
     <string name="FakePasscodeRestore">Restore Fake Passcode</string>
+    <string name="MaskingNotificationText">Notification Text For Masking</string>
+    <string name="MaskingPrimaryColor">Primary Color</string>
+    <string name="MaskingIcon">Icon</string>
+    <string name="MaskingLoadIcon">Load Icon</string>
     <string name="CreateFakePasscodeInfoPIN">Please enter any 4 digits that you will give to an attacker to unlock Telegram. The code must be different from other passcodes in the application.</string>
     <string name="CreateFakePasscodeInfoPassword">Please enter the password that you will give to an attacker to unlock Telegram. The code must be different from other passcodes in the application.</string>
     <string name="ClearDrafts">Clear Drafts</string>
@@ -10534,6 +10552,7 @@
     <string name="NotePasscodeScreen_NoteTitle">Title</string>
     <string name="NotePasscodeScreen_NoteDescription">Description</string>
     <string name="CalculatorPasscodeScreen_Instruction">Enter the passcode using the calculator numbers.</string>
+    <string name="LoginPasscodeScreen_Instruction">Enter the passcode to the password field on login page.</string>
     <string name="MaskedPasscodeScreenInstructionShownOnlyOnce">This instruction is only shown the first time you launch the app or create a passcode for the first time. It will not be shown when you actually unlock the app.</string>
     <string name="MaskedPasscodeScreen_Tutorial">Tutorial</string>
     <string name="MaskedPasscodeScreen_WrongPasscode">You have entered an incorrect passcode. Try again.</string>
